@@ -1,0 +1,27 @@
+{
+  "orderData": {
+    "area": "Virar East",
+    "card_amt": "0.00",
+    "cash_amt": "0.00",
+    "net_order_amt": "100.54",
+    "order_number": "90337/1000038",
+    "retailer_id": 90337,
+    "net_amount_before_discount":2456.43,
+    "coupon_code_order_level": "FREESUGAR,SC5",
+    "status": "Ordered",
+    "items": [
+      {
+        "item_id": 1200110010,
+        "item_disc": "Chana Akka Standard - 30 kg",
+        "dealer_price":"809.2",
+        "apmc_charge": "1.00",
+        "gst_charge": "2.24",
+        "transport_charge": "40.0",
+        "total_amt": "2456.43",
+        "order_qty": "2"
+      }
+    ]
+  },
+  "retailer_id": 90337,
+  "phone": 9353838781
+}
