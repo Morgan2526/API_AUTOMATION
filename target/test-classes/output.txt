@@ -1,0 +1,45 @@
+Test 1: Authentication_token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6OTM1MzgzODc4MSwiaWF0IjoxNjc0NDQ5MjIxLCJleHAiOjE2NzcwNDEyMjF9.8-S7Jja9-j0RhLfu0khVZmqfJQkM6Csf8i9A2PFjFI0
+
+Test 2: Retailer Details
+The retailer id recived from is 90337 equals retailer id given by user 90337
+
+Test 3: Orders
+The last order number recieved from orders api 1000037  and the last order number recieved from retailer detail 1000037
+
+Test 4: Offers_List
+	 Test 1:Offer is active test
+		Coupon Code:Instant10                              Is_Active_Flag:Y
+		Coupon Code:1Per                              Is_Active_Flag:Y
+		Coupon Code:multipleoffer                              Is_Active_Flag:Y
+		Coupon Code:FreeSugar                              Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:                               Is_Active_Flag:Y
+
+	 Test 2:Offer Date Validity
+
+		Coupon Code:Instant10
+		this is the start date 2022-09-16 00:00
+		this is the current date 2023-01-19 11:28 GMT+05:30
+		this is the end date 2023-01-30 23:59
+
+		Coupon Code:1Per
+		this is the start date 2022-09-20 00:00
+		this is the current date 2023-01-19 11:28 GMT+05:30
+		this is the end date 2023-10-27 23:59
+
+		Coupon Code:multipleoffer
+		this is the start date 2022-11-02 00:00
+		this is the current date 2023-01-19 11:28 GMT+05:30
+		this is the end date 2023-11-02 23:59
+
+		Coupon Code:FreeSugar
+		this is the start date 2022-12-06 00:00
+		this is the current date 2023-01-19 11:28 GMT+05:30
+		this is the end date 2023-12-30 23:59

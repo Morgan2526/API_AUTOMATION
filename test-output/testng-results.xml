@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
+<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-19T13:19:40 IST" name="Default suite" finished-at="2023-01-19T13:19:46 IST" duration-ms="5546">
+  <suite started-at="2023-01-23T10:16:53 IST" name="Default suite" finished-at="2023-01-23T10:17:07 IST" duration-ms="14237">
     <groups>
     </groups>
-    <test started-at="2023-01-19T13:19:40 IST" name="Default test" finished-at="2023-01-19T13:19:46 IST" duration-ms="5546">
+    <test started-at="2023-01-23T10:16:53 IST" name="Default test" finished-at="2023-01-23T10:17:07 IST" duration-ms="14237">
       <class name="auth_token_test">
-        <test-method signature="read_info()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:40 IST" name="read_info" finished-at="2023-01-19T13:19:40 IST" duration-ms="9" status="PASS">
+        <test-method signature="read_info()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:16:53 IST" name="read_info" finished-at="2023-01-23T10:16:53 IST" duration-ms="21" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- read_info -->
-        <test-method signature="test_1()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:40 IST" name="test_1" finished-at="2023-01-19T13:19:42 IST" duration-ms="1869" status="PASS">
+        <test-method signature="test_1()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:16:53 IST" name="test_1" finished-at="2023-01-23T10:17:00 IST" duration-ms="6643" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_1 -->
-        <test-method signature="test_2()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:42 IST" name="test_2" finished-at="2023-01-19T13:19:43 IST" duration-ms="781" status="PASS">
+        <test-method signature="test_2()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:17:00 IST" name="test_2" finished-at="2023-01-23T10:17:01 IST" duration-ms="936" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_2 -->
-        <test-method signature="test_3()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:43 IST" name="test_3" finished-at="2023-01-19T13:19:44 IST" duration-ms="753" status="PASS">
+        <test-method signature="test_3()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:17:01 IST" name="test_3" finished-at="2023-01-23T10:17:02 IST" duration-ms="1592" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_3 -->
-        <test-method signature="test_4()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:44 IST" name="test_4" finished-at="2023-01-19T13:19:44 IST" duration-ms="719" status="PASS">
+        <test-method signature="test_4()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:17:02 IST" name="test_4" finished-at="2023-01-23T10:17:04 IST" duration-ms="1537" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_4 -->
-        <test-method signature="test_5()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:44 IST" name="test_5" finished-at="2023-01-19T13:19:45 IST" duration-ms="870" status="PASS">
+        <test-method signature="test_5()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:17:04 IST" name="test_5" finished-at="2023-01-23T10:17:05 IST" duration-ms="1380" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_5 -->
-        <test-method signature="test_6()[pri:0, instance:auth_token_test@bf1ec20]" started-at="2023-01-19T13:19:45 IST" name="test_6" finished-at="2023-01-19T13:19:46 IST" duration-ms="507" status="PASS">
+        <test-method signature="test_6()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:17:05 IST" name="test_6" finished-at="2023-01-23T10:17:06 IST" duration-ms="780" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_6 -->
+        <test-method signature="test_7()[pri:0, instance:auth_token_test@4a11eb84]" started-at="2023-01-23T10:17:06 IST" name="test_7" finished-at="2023-01-23T10:17:07 IST" duration-ms="1239" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test_7 -->
       </class> <!-- auth_token_test -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

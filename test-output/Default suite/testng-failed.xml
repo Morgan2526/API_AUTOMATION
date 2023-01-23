@@ -6,6 +6,7 @@
       <class name="auth_token_test">
         <methods>
           <include name="test_5"/>
+          <include name="test_4"/>
         </methods>
       </class> <!-- auth_token_test -->
     </classes>

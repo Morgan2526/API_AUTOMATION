@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import java.util.List;
 import java.util.*;
 import java.util.HashSet;
 import java.text.ParseException;
@@ -14,7 +13,8 @@ import java.text.SimpleDateFormat;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.io.File;
+import java.io.FileWriter; 
 
 public class auth_token_test {
 	
@@ -33,6 +33,8 @@ public class auth_token_test {
 	JsonPath all_offers;
 	JSONObject item=new JSONObject();
 	JSONArray itemincart =new JSONArray();
+	File myObj;
+	
 	
 	@Test
 	public void read_info()throws FileNotFoundException, IOException, org.json.simple.parser.ParseException
@@ -43,6 +45,18 @@ public class auth_token_test {
 	    //System.out.println(cart_for_order);
 	    phone=cart_for_order.get("phone");
 	    retailer_id=cart_for_order.get("retailer_id");
+	    try {
+	        File myObj  = new File("E:/Superzop/RestAssuredProject/src/test/resources/output.txt");
+	        if (myObj.createNewFile()) {
+	          System.out.println("File created: " + myObj.getName());
+	        } else {
+	          System.out.println("File already exists.");
+	        }
+	      } catch (IOException e) {
+	        System.out.println("An error occurred.");
+	        e.printStackTrace();
+	      }
+	    
 	}
 	
 
@@ -62,6 +76,16 @@ public class auth_token_test {
 			JsonPath jsonPathEvaluator = response.jsonPath();
 			token=jsonPathEvaluator.get("token");
 			System.out.println(token);
+			try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt");
+			      myWriter.write("Test 1: Authentication_token\n");
+			      myWriter.write(token+"\n");
+			      myWriter.close();
+			    } catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+
 			
 		}
 		
@@ -86,6 +110,16 @@ public class auth_token_test {
 			 last_order_number=arrays[1];
 			// System.out.println(last_order_number);
 			 System.out.println("\nthe retailer id recived is "+retailer_id_recieved+" equals "+retailer_id);
+			 try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\nTest 2: Retailer Details");
+			      myWriter.write("\nThe retailer id recived from is "+retailer_id_recieved+" equals retailer id given by user "+retailer_id+"\n");
+			      myWriter.close();
+
+			    } catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
 			// System.out.println(last_order_number);
 			 
 			
@@ -144,6 +178,16 @@ public class auth_token_test {
 					 //System.out.println("true "+n+" "+previous);
 					 item.put("data",jsonPathEvaluator.get("data["+i+"]"));
 					 itemincart.put(item);
+					 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\nTest 3: Orders");
+					      myWriter.write("\nThe last order number recieved from orders api "+previous +"  and the last order number recieved from retailer detail "+last_order_number+"\n");
+					      myWriter.close();
+
+					    } catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
 					 System.out.println("\nthe last order number recieved from orders api "+previous +"  and the last order number recieved from retailer detail "+last_order_number);
 					 break;
 				 }
@@ -164,16 +208,46 @@ public class auth_token_test {
 			 {
 				 item.put("data",jsonPathEvaluator.get("data[0]"));
 				 itemincart.put(item);
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\nTest 3: Orders");
+				      myWriter.write("\nthe last order number recieved from orders api "+fb_keyarray[1] +"  and the last order number recieved from retailer detail "+last_order_number+"\n");
+				      myWriter.close();
+
+				    } catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 			 System.out.println("\nthe last order number recieved from orders api "+fb_keyarray[1] +"  and the last order number recieved from retailer detail "+last_order_number);
 //remove comment after the resolution of stock indicator and stock management issue
 			// Assert.assertEquals(fb_keyarray[1],last_order_number);
 			 System.out.println(itemincart);
 			 }
 			 }else {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\nTest 3: Orders");
+				      myWriter.write("\nNo orders placed from this retailer");
+				      myWriter.close();
+
+				    } catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 				 System.out.println("\nNo orders placed from this retailer");
 				 Assert.assertEquals(1, 1);
 			 }}
 			 else {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\nTest 3: Orders");
+				      myWriter.write("\nNo orders placed from this retailer");
+				      myWriter.close();
+
+				    } catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 				 System.out.println("\nNo orders placed from this retailer");
 				 Assert.assertEquals(1, 1);
 			 }
@@ -195,36 +269,87 @@ public class auth_token_test {
 			 
 			 JsonPath jsonPathEvaluator = response.jsonPath();
 //is active test
+			 try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\nTest 4: Offers_List");
+			      myWriter.write("\n\t Test 1:Offer is active test");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
 			 System.out.println("\nthe is active test for offers list follows here ");
-			List<String> data_isactive = jsonPathEvaluator.getList("data.is_active");			
-			for(String is_active : data_isactive){
-				System.out.println(is_active);
-				Assert.assertEquals(is_active, "Y");
-			}
-			List<String> product_isactive = jsonPathEvaluator.getList("product_offers.is_active");
-			for(String is_active : product_isactive){
-				System.out.println(is_active); 
-				Assert.assertEquals(is_active, "Y");
-			}
+			 int x= jsonPathEvaluator.getInt("data.size()");
+			 for(int i=0;i<x;i++)
+			 {
+				 String s=jsonPathEvaluator.getString("data["+i+"].is_active");
+				 String a=jsonPathEvaluator.getString("data["+i+"].coupon_code");
+				 Assert.assertEquals(s, "Y");
+				 System.out.println("\n\tCoupon Code:"+a+"                               Is_Active_Flag:"+s+"");
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t\tCoupon Code:"+a+"                              Is_Active_Flag:"+s+"");
+				      myWriter.close();
+
+				    } catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+			 }
+			 int y= jsonPathEvaluator.getInt("product_offers.size()");
+			 for(int i=0;i<y;i++)
+			 {
+				 String s=jsonPathEvaluator.getString("product_offers["+i+"].is_active");
+				 String a=jsonPathEvaluator.getString("product_offers["+i+"].offer_code");
+				 Assert.assertEquals(s, "Y");
+				 System.out.println("\n\tCoupon Code:"+a+"                               Is_Active_Flag:"+s+"");
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t\tCoupon Code:"+a+"                               Is_Active_Flag:"+s+"");
+				      myWriter.close();
+
+				    } catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+			 }
+
+			 try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n");
+			      myWriter.write("\n\t Test 2:Offer Date Validity\n");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
 			
-			List<String> start_dt = jsonPathEvaluator.getList("data.valid_from");
-			for(String date : start_dt){
-				
-				SimpleDateFormat cejdf = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
-		         cejdf.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
-		         String cjava_date = cejdf.format(cdate*1000);
-				//Assert.assertEquals(is_active, "Y");
-				System.out.println("this is the start date "+date);
-				System.out.println("this is the current date "+cjava_date+"\n");
-			}
-			List<String> end_dt = jsonPathEvaluator.getList("data.valid_until");
-			for(String date : end_dt){
-				SimpleDateFormat cejdf = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
-		         cejdf.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
-		         String cjava_date = cejdf.format(cdate*1000);
-				System.out.println("this is the current date "+cjava_date);
-				System.out.println("this is the end date "+date+"\n");
-			}
+			 for(int i=0;i<x;i++)
+			 {
+				 String start_date=jsonPathEvaluator.getString("data["+i+"].valid_from");
+				 String end_dt = jsonPathEvaluator.getString("data["+i+"].valid_until");
+				 String a=jsonPathEvaluator.getString("data["+i+"].coupon_code");
+				 SimpleDateFormat date_formater = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
+				 date_formater.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
+				 String cjava_date = date_formater.format(cdate*1000);
+				 System.out.println("this is the start date "+start_date);
+				 System.out.println("this is the current date "+cjava_date);
+				 System.out.println("this is the end date "+end_dt+"\n");
+				 
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t\tCoupon Code:"+a);
+				      myWriter.write("\n\t\tthis is the start date "+start_date);
+				      myWriter.write("\n\t\tthis is the current date "+cjava_date);
+				      myWriter.write("\n\t\tthis is the end date "+end_dt +"\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+				 
+			 }
+
 			
 			
 
@@ -339,13 +464,13 @@ public class auth_token_test {
 		    	  String st_series=l.getString("product_offers["+i+"].store_series");
 		    	  String[] st=st_series.split(",");
 		    	  flag = 0;
-		    	  for(int x=0;x<st.length;x++)
+		    	  for(int p=0;p<st.length;p++)
 		    	  { 
 		    		  if(st[x].equals(store_series))
 		    		  {
 		    			  flag = 1;
 		    			  Assert.assertEquals(2,2);
-		    			  System.out.println("its a match!"+st[x]);
+		    			  System.out.println("its a match!"+st[p]);
 		    			  break;
 		    		  }
 		    		  else
@@ -680,23 +805,23 @@ public class auth_token_test {
 		}}	
 		
 		
-//		@Test 
-//		public void test_7() throws FileNotFoundException, IOException, org.json.simple.parser.ParseException
-//		{
-//			JSONParser parser = new JSONParser();
-//		      
-//		         Object obj = parser.parse(new FileReader("E:/Superzop/RestAssuredProject/src/test/resources/cart.json"));
-//		         JSONObject cart_for_order = (JSONObject)obj;
-//		         System.out.println(cart_for_order);
-//		      
-//		      RestAssured.given().header("x-access-token",token).
-//				header("Content-type","application/json").
-//				body(cart_for_order.toJSONString()).
-//	             when().
-//	             post("http://test-api.superzop.com:3000/place-order").
-//	             then().log().all();
-//		      
-//		}
+		@Test 
+		public void test_7() throws FileNotFoundException, IOException, org.json.simple.parser.ParseException
+		{
+			JSONParser parser = new JSONParser();
+		      
+		         Object obj = parser.parse(new FileReader("E:/Superzop/RestAssuredProject/src/test/resources/cart.json"));
+		         JSONObject cart_for_order = (JSONObject)obj;
+		         System.out.println(cart_for_order);
+		      
+		      RestAssured.given().header("x-access-token",token).
+				header("Content-type","application/json").
+				body(cart_for_order.toJSONString()).
+	             when().
+	             post("http://test-api.superzop.com:3000/place-order").
+	             then().log().all();
+		      
+		}
 		
 		
 }
