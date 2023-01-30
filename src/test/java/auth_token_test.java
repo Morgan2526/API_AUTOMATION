@@ -27,6 +27,22 @@ public class auth_token_test {
 	String group_id;
 	String store_series;
 	long cdate=1674107881;
+	Vector<String> offer_product_id=new Vector<String>();
+	Vector<String> min_purchase_qty1=new Vector<String>();
+	Vector<String> min_purchase_qty2=new Vector<String>();
+	Vector<String> min_purchase_qty3=new Vector<String>();
+	Vector<String> min_purchase_qty4=new Vector<String>();
+	Vector<String> min_purchase_qty5=new Vector<String>();
+	Vector<String> max_purchase_qty1=new Vector<String>();
+	Vector<String> max_purchase_qty2=new Vector<String>();
+	Vector<String> max_purchase_qty3=new Vector<String>();
+	Vector<String> max_purchase_qty4=new Vector<String>();
+	Vector<String> max_purchase_qty5=new Vector<String>();
+	Vector<String> offer_price1=new Vector<String>();
+	Vector<String> offer_price2=new Vector<String>();
+	Vector<String> offer_price3=new Vector<String>();
+	Vector<String> offer_price4=new Vector<String>();
+	Vector<String> offer_price5=new Vector<String>();
 
 	String coupon_code_order_level;
 	String[] ordervalue=new String[n];
@@ -85,13 +101,11 @@ public class auth_token_test {
 			      System.out.println("An error occurred.");
 			      e.printStackTrace();
 			    }
-
-			
 		}
 		
 		@Test
 		public void test_2() {
-			String retailer_id_recieved;
+			String retailer_id_received;
 			String URL="http://test-api.superzop.com:3000/retailer";	 
 			 Response response = RestAssured.given().header("x-access-token",token).with().
 						queryParam("phone", phone).
@@ -105,15 +119,15 @@ public class auth_token_test {
 			 last_order_number= jsonPathEvaluator.get("data.last_order_number");
 			 store_series=jsonPathEvaluator.get("data.store_series");
 			 String[] arrays=last_order_number.split("/");
-			 retailer_id_recieved=arrays[0];
-			 //Assert.assertEquals(retailer_id_recieved,retailer_id);
+			 retailer_id_received=arrays[0];
+			 //Assert.assertEquals(retailer_id_received,retailer_id);
 			 last_order_number=arrays[1];
 			// System.out.println(last_order_number);
-			 System.out.println("\nthe retailer id recived is "+retailer_id_recieved+" equals "+retailer_id);
+			 System.out.println("\nthe retailer id received is "+retailer_id_received+" equals "+retailer_id);
 			 try {
 			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
 			      myWriter.write("\nTest 2: Retailer Details");
-			      myWriter.write("\nThe retailer id recived from is "+retailer_id_recieved+" equals retailer id given by user "+retailer_id+"\n");
+			      myWriter.write("\nThe retailer id received from is "+retailer_id_received+" equals retailer id given by user "+retailer_id+"\n");
 			      myWriter.close();
 
 			    } catch (IOException e) {
@@ -181,14 +195,14 @@ public class auth_token_test {
 					 try {
 					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
 					      myWriter.write("\nTest 3: Orders");
-					      myWriter.write("\nThe last order number recieved from orders api "+previous +"  and the last order number recieved from retailer detail "+last_order_number+"\n");
+					      myWriter.write("\nThe last order number received from orders api "+previous +"  and the last order number received from retailer detail "+last_order_number+"\n");
 					      myWriter.close();
 
 					    } catch (IOException e) {
 					      System.out.println("An error occurred.");
 					      e.printStackTrace();
 					    }
-					 System.out.println("\nthe last order number recieved from orders api "+previous +"  and the last order number recieved from retailer detail "+last_order_number);
+					 System.out.println("\nthe last order number received from orders api "+previous +"  and the last order number received from retailer detail "+last_order_number);
 					 break;
 				 }
 				 else
@@ -211,14 +225,14 @@ public class auth_token_test {
 				 try {
 				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
 				      myWriter.write("\nTest 3: Orders");
-				      myWriter.write("\nthe last order number recieved from orders api "+fb_keyarray[1] +"  and the last order number recieved from retailer detail "+last_order_number+"\n");
+				      myWriter.write("\nthe last order number received from orders api "+fb_keyarray[1] +"  and the last order number received from retailer detail "+last_order_number+"\n");
 				      myWriter.close();
 
 				    } catch (IOException e) {
 				      System.out.println("An error occurred.");
 				      e.printStackTrace();
 				    }
-			 System.out.println("\nthe last order number recieved from orders api "+fb_keyarray[1] +"  and the last order number recieved from retailer detail "+last_order_number);
+			 System.out.println("\nthe last order number received from orders api "+fb_keyarray[1] +"  and the last order number received from retailer detail "+last_order_number);
 //remove comment after the resolution of stock indicator and stock management issue
 			// Assert.assertEquals(fb_keyarray[1],last_order_number);
 			 System.out.println(itemincart);
@@ -357,9 +371,13 @@ public class auth_token_test {
 		      JsonPath j = new JsonPath(response.asString());
 		      int s = j.getInt("product_offers.size()");
 		      for(int i = 0; i < s; i++) {
-		    	  String o_code=j.getString("product_offers["+i+"].offer_code");
+		    	  String o_code=j.getString("product_offers["+i+"].offer_id");
 //start date
-		         String start_date = j.getString("product_offers["+i+"].start_date"); 
+		         String start_date = j.getString("product_offers["+i+"].start_date");
+		         String end_date = j.getString("product_offers["+i+"].end_date");
+		         SimpleDateFormat cejdf = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
+		         
+		         if(start_date.equals("0")==false && end_date.equals("0")==false) {
 		         long s_date=Long.parseLong(start_date);
 		         Date date = new java.util.Date(s_date); 
 		         SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
@@ -368,7 +386,7 @@ public class auth_token_test {
 		         System.out.println("start_date: "+java_date);
 		         
 //end_date
-		         String end_date = j.getString("product_offers["+i+"].end_date");
+		         
 		         long e_date=Long.parseLong(end_date);
 		         Date edate = new java.util.Date(e_date); 
 		         SimpleDateFormat ejdf = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
@@ -377,7 +395,7 @@ public class auth_token_test {
 		         System.out.println("end_date: "+ejava_date);
 		         
 //current_date
-		         SimpleDateFormat cejdf = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
+		         
 		         cejdf.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
 		         String cjava_date = cejdf.format(cdate*1000);
 		         System.out.println("current_date: "+cjava_date+"\n");
@@ -391,6 +409,19 @@ public class auth_token_test {
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
+						
+						
+						try {
+						      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+						      myWriter.write("\n\t\tCoupon Code:"+o_code);
+						      myWriter.write("\n\t\tthis is the start date "+java_date);
+						      myWriter.write("\n\t\tthis is the current date "+cjava_date);
+						      myWriter.write("\n\t\tthis is the end date "+ejava_date +"\n");
+						      myWriter.close();
+						 }catch (IOException e) {
+						      System.out.println("An error occurred.");
+						      e.printStackTrace();
+						    }
 		         
 //checking _
 		         
@@ -421,15 +452,20 @@ public class auth_token_test {
 				else {
 
 		         if(d1.compareTo(d2) > 0) {
-//		        	 System.out.println(o_code);
+		        	 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\tthe offer code "+o_code+" Start date occurs after current date");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
 		        	 Assert.assertFalse(2<1,o_code+"Start date occurs after current date\\n" );
-//		            System.out.println("Start date occurs after current date\n");
-		         } else if(d1.compareTo(d2) < 0) {
+		        	 } 
+		          else if(d1.compareTo(d2) < 0) {
 		        	 Assert.assertEquals(1,1);
-//		            System.out.println("current Date occurs after Start_Date\n");
 		         } else if(d1.compareTo(d2) == 0) {
 		        	 Assert.assertEquals(1,1);
-//		            System.out.println("Both dates are equal\n");
 		         }}
 				
 				if(d3.compareTo(zero1)==0)
@@ -438,38 +474,77 @@ public class auth_token_test {
 				}
 				else {
 		         if(d2.compareTo(d3) > 0) {
-//		        	 System.out.println(o_code);
+		        	 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\tthe offer code "+o_code+" Start date occurs after current date");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
 		        	 Assert.assertFalse(2<1,o_code+"Current date occurs after End_date\n" );
-//		        	 	Assert.assertEquals(1,2);
-//			            System.out.println("Current date occurs after End_date\n");
+
 			         } else if(d1.compareTo(d2) < 0) {
 			        	 Assert.assertEquals(1,1);
-//			            System.out.println("End date occurs after Current_Date\n");
 			         } else if(d1.compareTo(d2) == 0) {
 			        	 Assert.assertEquals(1,1);
-//			            System.out.println("Both dates are equal\n");
 			         }
 		         
 				}
 		         
 
 		      }
+		         
+		         else
+		        	 {
+		        	 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\tthe offer code "+o_code+" has start date and end dates as 0");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
+		        	 	System.out.println("the offer code "+o_code+" has start date and end dates as 0");
+		        	 }
+		      }
 		      
-//store series check		      
+//store series check	
+		      try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n");
+			      myWriter.write("\n\t Test 3:Store Series Checking Test\n");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
 		      int flag=7;
 		      JsonPath l = new JsonPath(response.asString());
 		      all_offers =l;
-		      int k = j.getInt("product_offers.size()");
+		      
+		      int k = j.getInt("data.size()");
 		      for(int i = 0; i < k; i++) {
-		    	  String st_series=l.getString("product_offers["+i+"].store_series");
+		    	  String st_series=l.getString("data["+i+"].store_series");
+		    	  String co_code=l.getString("data["+i+"].coupon_code");
 		    	  String[] st=st_series.split(",");
 		    	  flag = 0;
 		    	  for(int p=0;p<st.length;p++)
 		    	  { 
-		    		  if(st[x].equals(store_series))
+		    		  
+		    		  if(st[p].equals(store_series))
 		    		  {
 		    			  flag = 1;
 		    			  Assert.assertEquals(2,2);
+		    			  //System.out.println(co_code);
+		    			  try {
+						      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+						      myWriter.write("\n\t\tthe offer code "+co_code+" contains the store-series of requested retailer "+st[p]);
+						      myWriter.close();
+						 }catch (IOException e) {
+						      System.out.println("An error occurred.");
+						      e.printStackTrace();
+						    }
 		    			  System.out.println("its a match!"+st[p]);
 		    			  break;
 		    		  }
@@ -481,10 +556,100 @@ public class auth_token_test {
 		    	  if(flag==9)
 		    	  {
 		    		  Assert.assertFalse(2<1,"no store series!");
+		    		  try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\tthe offer code "+co_code+" does not contains the store-series of requested retailer ");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
 		    		  //System.out.println("no store series!");
 		    	  }
 		    	  //System.out.println(st_series.charAt(0));
 		      }
+		      
+		      int f=7;
+
+		      int q = j.getInt("product_offers.size()");
+		      for(int i = 0; i < q; i++) {
+		    	  String item_ids=jsonPathEvaluator.getString("product_offers["+i+"].item_id");
+		    	  String min=jsonPathEvaluator.getString("product_offers["+i+"].min_pur_qty");
+		    	  String max=jsonPathEvaluator.getString("product_offers["+i+"].max_pur_qty");
+		    	  String min2=jsonPathEvaluator.getString("product_offers["+i+"].minimum_purchase_qty2");
+		    	  String max2=jsonPathEvaluator.getString("product_offers["+i+"].maximum_purchase_qty2");
+		    	  String min3=jsonPathEvaluator.getString("product_offers["+i+"].minimum_purchase_qty3");
+		    	  String max3=jsonPathEvaluator.getString("product_offers["+i+"].maximum_purchase_qty3");
+
+		    	  String o1=jsonPathEvaluator.getString("product_offers["+i+"].offer_price");
+		    	  String o2=jsonPathEvaluator.getString("product_offers["+i+"].offer_price2");
+		    	  String o3=jsonPathEvaluator.getString("product_offers["+i+"].offer_price3");
+
+		    	  offer_product_id.add(item_ids);
+		    	  min_purchase_qty1.add(min);
+		    	  max_purchase_qty1.add(max);
+		    	  min_purchase_qty2.add(min2);
+		    	  max_purchase_qty2.add(max2);
+		    	  min_purchase_qty3.add(min3);
+		    	  max_purchase_qty3.add(max3);
+
+		    	  offer_price1.add(o1);
+		    	  offer_price2.add(o2);
+		    	  offer_price3.add(o3);
+
+		    	  String st_series=l.getString("product_offers["+i+"].store_series");
+		    	  String[] st=st_series.split(",");
+		    	  flag = 0;
+		    	  for(int p=0;p<st.length;p++)
+		    	  { 
+		    		  if(st[p].equals(store_series))
+		    		  {
+		    			  flag = 1;
+		    			  Assert.assertEquals(2,2);
+		    			  try {
+						      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+						      myWriter.write("\n\t\tthe product offer id "+item_ids+" contains the store-series of requested retailer "+st[p]);
+						      myWriter.close();
+						 }catch (IOException e) {
+						      System.out.println("An error occurred.");
+						      e.printStackTrace();
+						    }
+		    			  System.out.println("its a match!"+st[p]);
+		    			  break;
+		    		  }
+		    		  else
+		    		  {
+		    			  f=9;
+		    			  
+			    		  try {
+						      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+						      myWriter.write("\n\t\tthe product offer id "+item_ids+" does not contains the store-series of requested retailer ");
+						      myWriter.close();
+						 }catch (IOException e) {
+						      System.out.println("An error occurred.");
+						      e.printStackTrace();
+						    }
+		    		  }
+		    	  }
+		    	  if(f==9)
+		    	  {
+		    		  Assert.assertFalse(2<1,"no store series!");
+		    		  //System.out.println("no store series!");
+		    	  }
+		    	  //System.out.println(st_series.charAt(0));
+		      }
+		      System.out.println(offer_product_id);
+		      System.out.println(min_purchase_qty1);
+		      System.out.println(max_purchase_qty1);
+		      System.out.println(min_purchase_qty2);
+		      System.out.println(max_purchase_qty2);
+		      System.out.println(min_purchase_qty3);
+		      System.out.println(max_purchase_qty3);
+
+		      System.out.println(offer_price1);
+		      System.out.println(offer_price2);
+		      System.out.println(offer_price3);
+
 
 }
 			
@@ -542,9 +707,26 @@ public class auth_token_test {
 		             then().//log().all();
 		             extract().response();
 			
-					
+			try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n ");
+			      myWriter.write("\nTest 5: Cart_Offers\n ");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }	
 			if(carray.isEmpty())
 			{
+				try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t Test 1:Cart is Empty Check!\n");
+				      myWriter.write("\n\t\tNo items in cart hence no offers availed! ");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 				System.out.println("No items in cart hence no offers availed!");
 			}
 			else {
@@ -556,6 +738,16 @@ public class auth_token_test {
 					int s = res.getInt("offers.size()");
 					if(s==0)
 					{
+						 try {
+						      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+						      myWriter.write("\n");
+						      myWriter.write("\n\t Test 1:Coupon If Availed\n");
+						      myWriter.write("\n\t\tNo coupons were availed!\n");
+						      myWriter.close();
+						 }catch (IOException e) {
+						      System.out.println("An error occurred.");
+						      e.printStackTrace();
+						    }
 						System.out.println("No coupons were availed!");
 					}
 				      String[] co_code= new String[s];
@@ -572,6 +764,14 @@ public class auth_token_test {
 //getting all coupon / offer codes from offer list!
 				      if(all_offers==null)
 				      {
+				    	  try {
+						      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+						      myWriter.write("\n\t\tthe offer list is null for retailer\n");
+						      myWriter.close();
+						 }catch (IOException e) {
+						      System.out.println("An error occurred.");
+						      e.printStackTrace();
+						    }
 				    	  System.out.println("the offer list is null for retailer");
 				    	  Assert.assertEquals(1, 1);
 				      }
@@ -614,6 +814,14 @@ public class auth_token_test {
 				            if (!set.contains(co_code[i]))
 				            {
 				            	flag=0;
+				            	try {
+								      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+								      myWriter.write("\n\t\tthe coupon code "+co_code[i]+"is not present in offer list\n");
+								      myWriter.close();
+								 }catch (IOException e) {
+								      System.out.println("An error occurred.");
+								      e.printStackTrace();
+								    }
 				            	Assert.assertFalse(2<1, "the coupon code "+co_code[i]+"is not present in offer list");
 				            }
 				            else 
@@ -622,6 +830,14 @@ public class auth_token_test {
 				            }
 				        }
 				        if(flag==2) {
+				        	try {
+							      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+							      myWriter.write("\n\t\tall codes availed are present in the offer-list\n");
+							      myWriter.close();
+							 }catch (IOException e) {
+							      System.out.println("An error occurred.");
+							      e.printStackTrace();
+							    }
 				        System.out.println("all codes availed are present in the offer-list");
 				        Assert.assertEquals(1, 1);
 				      
@@ -645,6 +861,14 @@ public class auth_token_test {
 				    			  if(mode.equals("instant")==true) {
 				    			  System.out.println(res.getString("offers["+i+"].coupon_code"));
 				    			  System.out.println(all_offers.getString("data["+j+"].coupon_code"));
+				    			  try {
+								      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+								      myWriter.write("\n\t\t"+res.getString("offers["+i+"].coupon_code")+"\t"+all_offers.getString("data["+j+"].coupon_code")+"");
+								      myWriter.close();
+								 }catch (IOException e) {
+								      System.out.println("An error occurred.");
+								      e.printStackTrace();
+								    }
 				    			  Float orderdisc,y=(float) 1.1;
 		   //order discount
 				    			  String order_disc=res.getString("offers["+i+"].order_disc");
@@ -681,16 +905,41 @@ public class auth_token_test {
 				    				  orderdisc=tot*x;
 				    				  if(Float.compare(orderdisc, y)==0)
 				    				  {
+				    					  try {
+										      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+										      myWriter.write("\n\t\t "+orderdisc+" "+y+"");
+										      myWriter.write("\n\t\torder discount and calculated order discount are equal");
+										      myWriter.close();
+										 }catch (IOException e) {
+										      System.out.println("An error occurred.");
+										      e.printStackTrace();
+										    }
 				    					  System.out.println(orderdisc+" "+y);
 				    					  System.out.println("order discount and calculated order discount are equal");
 				    					  break;
 				    				  }
 				    				  else if(Float.compare(orderdisc, total_cashback)==0)
 				    				  {
+				    					  try {
+										      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+										      myWriter.write("\n\t\tthe cashbacks availed are also equal");
+										      myWriter.close();
+										 }catch (IOException e) {
+										      System.out.println("An error occurred.");
+										      e.printStackTrace();
+										    }
 				    					  System.out.println("the cashbacks availed are also equal");
 				    					  break;
 				    				  }
 				    				  else {
+				    					  try {
+										      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+										      myWriter.write("\n\t\tthere is no cashback as well as discount availed");
+										      myWriter.close();
+										 }catch (IOException e) {
+										      System.out.println("An error occurred.");
+										      e.printStackTrace();
+										    }
 				    					  System.out.println("there is no cashback as well as discount availed");
 				    				  }
 				    			  }
@@ -700,6 +949,14 @@ public class auth_token_test {
 				    				  
 				    				  if(Float.compare(orderdisc, y)==0)
 				    				  {
+				    					  try {
+										      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+										      myWriter.write("\n\t\torder discount and calculated order discount are equal");
+										      myWriter.close();
+										 }catch (IOException e) {
+										      System.out.println("An error occurred.");
+										      e.printStackTrace();
+										    }
 				    					  System.out.println("order discount and calculated order discount are equal");
 				    					  break;
 				    				  }
@@ -727,7 +984,15 @@ public class auth_token_test {
 				    				  
 				    				  if(got_offer_product_unit==calculated_offer_product_unit)
 				    				  {
-				    					  System.out.println("calculated offer product unit "+calculated_offer_product_unit +" and the offer product units recieved from api "+got_offer_product_unit);
+				    					  try {
+										      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+										      myWriter.write("\n\t\tcalculated offer product unit "+calculated_offer_product_unit +" and the offer product units received from api "+got_offer_product_unit);
+										      myWriter.close();
+										 }catch (IOException e) {
+										      System.out.println("An error occurred.");
+										      e.printStackTrace();
+										    }
+				    					  System.out.println("calculated offer product unit "+calculated_offer_product_unit +" and the offer product units received from api "+got_offer_product_unit);
 				    					  Assert.assertEquals(1, 1);
 				    				  }
 				    				  else { 
@@ -751,19 +1016,15 @@ public class auth_token_test {
 			JSONObject requestparams=new JSONObject();
 			Vector<String> product_id=new Vector<String>();
 			JSONObject product_qty=new JSONObject();
-			for(int i=0;i<itemincart.length();i++)
-			{	
-				org.json.JSONObject items = itemincart.getJSONObject(i);
-				org.json.JSONObject item_detail= (org.json.JSONObject) items.get("data");
-				
-				int j= (Integer) item_detail.get("item_id");
-				
-				//System.out.println(j);
-				product_id.add(String.valueOf(j));
-				product_qty.put(j,i+1);
-				
+			int d=offer_product_id.size();
+			System.out.println(d);
+			for(int i=0;i<d;i++)
+			{
+				product_id.add(offer_product_id.get(i));
+				product_qty.put(offer_product_id.get(i),min_purchase_qty1.get(i));
 			}
 			//System.out.println(product_id);
+			//System.out.println(product_qty);
 			
 			requestparams.put("retailer_id", retailer_id);
 			requestparams.put("store_series",store_series );
@@ -772,6 +1033,116 @@ public class auth_token_test {
 			requestparams.put("phone", phone);
 			
 			//System.out.println(requestparams);
+
+			
+			if(product_id.isEmpty())
+			{
+				System.out.println("There are no Products in the cart of the given customer!");
+			}
+			else {
+			
+			 Response response =
+					RestAssured.given().header("x-access-token",token).
+					header("Content-type","application/json").
+					body(requestparams.toJSONString()).
+		             when().
+		             post("http://test-api.superzop.com:3000/products-stock").
+		             then().//log().all();
+		             extract().response();
+//stock indicator check!	
+			 try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n ");
+			      myWriter.write("\nTest 6: Product Stock Check and Product offer check\n ");
+			      myWriter.write("\n\tTest 1: Product Stock Check and Product offer check for min_qty_1\n ");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+			 JsonPath jsonPathEvaluator = response.jsonPath();
+			 int n=jsonPathEvaluator.getInt("data.size()");
+			 //System.out.println(n);
+			 for(int i=0;i<n;i++) {
+			 String indicator=jsonPathEvaluator.getString("data["+i+"].stock_ind");
+			 String item_id=jsonPathEvaluator.getString("data["+i+"].item_id");
+			 String offer_price=jsonPathEvaluator.getString("data["+i+"].offers[0].offer_price");
+			 System.out.println(offer_price+"    "+offer_price1.get(i));
+			 if(indicator.equals("Y")) {
+				 if(offer_price.equals(offer_price1.get(i))) {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t\t"+item_id+" Is in stock");
+				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price1.get(i)+"\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+				 System.out.println(jsonPathEvaluator.getString("data["+i+"].item_id")+" It is in stock");
+			 }
+				 else {
+					 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\t"+item_id+" Is in stock");
+					      myWriter.write("\n\t\t the offer price is not correct");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
+				 }
+			 }
+			 else {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n");
+				      myWriter.write("\n\t\t"+item_id+" Is out of stock");
+				      myWriter.write("\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+				 System.out.println(jsonPathEvaluator.getString("data["+i+"].item_id")+" Is out of stock");
+			 }
+			 }
+			 
+		}}
+		
+		
+		@Test
+		public void test_7()
+		{
+			JSONObject requestparams=new JSONObject();
+			Vector<String> product_id=new Vector<String>();
+			JSONObject product_qty=new JSONObject();
+			int d=offer_product_id.size();
+			System.out.println(d);
+			for(int i=0;i<d;i++)
+			{
+				product_id.add(offer_product_id.get(i));
+				product_qty.put(offer_product_id.get(i),min_purchase_qty2.get(i));
+			}
+			//System.out.println(product_id);
+			//System.out.println(product_qty);
+			
+			requestparams.put("retailer_id", retailer_id);
+			requestparams.put("store_series",store_series );
+			requestparams.put("productIds", product_id);
+			requestparams.put("products_qty",product_qty);
+			requestparams.put("phone", phone);
+			
+			//System.out.println(requestparams);
+			try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n ");
+			      myWriter.write("\n\tTest 2: Product Stock Check and Product offer check for min_qty_2\n ");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
 			
 			if(product_id.isEmpty())
 			{
@@ -793,11 +1164,146 @@ public class auth_token_test {
 			 //System.out.println(n);
 			 for(int i=0;i<n;i++) {
 			 String indicator=jsonPathEvaluator.getString("data["+i+"].stock_ind");
+			 String item_id=jsonPathEvaluator.getString("data["+i+"].item_id");
+			 String offer_price=jsonPathEvaluator.getString("data["+i+"].offers[0].offer_price2");
+			 System.out.println(offer_price+"    "+offer_price2.get(i));
 			 if(indicator.equals("Y")) {
-
+				 if(offer_price.equals(offer_price2.get(i))) {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t\t"+item_id+" Is in stock");
+				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price1.get(i)+"\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 				 System.out.println(jsonPathEvaluator.getString("data["+i+"].item_id")+" It is in stock");
 			 }
+				 else {
+					 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\t"+item_id+" Is in stock");
+					      myWriter.write("\n\t\t the offer price is 0 because minimum_order_qty was 0 \n");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
+				 }
+			 }
 			 else {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n");
+				      myWriter.write("\n\t\t"+item_id+" Is out of stock");
+				      myWriter.write("\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+				 System.out.println(jsonPathEvaluator.getString("data["+i+"].item_id")+" Is out of stock");
+			 }
+			 }
+			 
+		}}	
+			
+		
+		
+		
+		@Test
+		public void test_8()
+		{
+			JSONObject requestparams=new JSONObject();
+			Vector<String> product_id=new Vector<String>();
+			JSONObject product_qty=new JSONObject();
+			int d=offer_product_id.size();
+			System.out.println(d);
+			for(int i=0;i<d;i++)
+			{
+				product_id.add(offer_product_id.get(i));
+				product_qty.put(offer_product_id.get(i),min_purchase_qty3.get(i));
+			}
+			//System.out.println(product_id);
+			//System.out.println(product_qty);
+			
+			requestparams.put("retailer_id", retailer_id);
+			requestparams.put("store_series",store_series );
+			requestparams.put("productIds", product_id);
+			requestparams.put("products_qty",product_qty);
+			requestparams.put("phone", phone);
+			
+			//System.out.println(requestparams);
+
+			try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n ");
+			      myWriter.write("\n\tTest 3: Product Stock Check and Product offer check for min_qty_3\n ");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+			if(product_id.isEmpty())
+			{
+				System.out.println("There are no Products in the cart of the given customer!");
+			}
+			else {
+			
+			 Response response =
+					RestAssured.given().header("x-access-token",token).
+					header("Content-type","application/json").
+					body(requestparams.toJSONString()).
+		             when().
+		             post("http://test-api.superzop.com:3000/products-stock").
+		             then().//log().all();
+		             extract().response();
+//stock indicator check!			 
+			 JsonPath jsonPathEvaluator = response.jsonPath();
+			 int n=jsonPathEvaluator.getInt("data.size()");
+			 //System.out.println(n);
+			 for(int i=0;i<n;i++) {
+			 String indicator=jsonPathEvaluator.getString("data["+i+"].stock_ind");
+			 String item_id=jsonPathEvaluator.getString("data["+i+"].item_id");
+			 String offer_price=jsonPathEvaluator.getString("data["+i+"].offers[0].offer_price3");
+			 System.out.println(offer_price+"    "+offer_price3.get(i));
+			 if(indicator.equals("Y")) {
+				 if(offer_price.equals(offer_price3.get(i))) {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n\t\t"+item_id+" Is in stock");
+				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price1.get(i)+"\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
+				 System.out.println(jsonPathEvaluator.getString("data["+i+"].item_id")+" It is in stock");
+			 }
+				 else {
+					 try {
+					      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+					      myWriter.write("\n\t\t"+item_id+" Is in stock");
+					      myWriter.write("\n\t\t the offer price is 0 because minimum_order_qty was 0 \n");
+					      myWriter.close();
+					 }catch (IOException e) {
+					      System.out.println("An error occurred.");
+					      e.printStackTrace();
+					    }
+				 }
+			 }
+			 else {
+				 try {
+				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+				      myWriter.write("\n");
+				      myWriter.write("\n\t\t"+item_id+" Is out of stock");
+				      myWriter.write("\n");
+				      myWriter.close();
+				 }catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 				 System.out.println(jsonPathEvaluator.getString("data["+i+"].item_id")+" Is out of stock");
 			 }
 			 }
@@ -805,8 +1311,12 @@ public class auth_token_test {
 		}}	
 		
 		
+		
+		
+		
+		
 		@Test 
-		public void test_7() throws FileNotFoundException, IOException, org.json.simple.parser.ParseException
+		public void test_10() throws FileNotFoundException, IOException, org.json.simple.parser.ParseException
 		{
 			JSONParser parser = new JSONParser();
 		      
@@ -820,6 +1330,17 @@ public class auth_token_test {
 	             when().
 	             post("http://test-api.superzop.com:3000/place-order").
 	             then().log().all();
+		      
+		      try {
+			      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
+			      myWriter.write("\n");
+			      myWriter.write("Test 7 : Place Order Api");
+			      myWriter.write("\n");
+			      myWriter.close();
+			 }catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
 		      
 		}
 		

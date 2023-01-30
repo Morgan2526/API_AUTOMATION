@@ -1,45 +1,156 @@
 Test 1: Authentication_token
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6OTM1MzgzODc4MSwiaWF0IjoxNjc0NDQ5MjIxLCJleHAiOjE2NzcwNDEyMjF9.8-S7Jja9-j0RhLfu0khVZmqfJQkM6Csf8i9A2PFjFI0
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6OTM1MzgzODc4MSwiaWF0IjoxNjc1MDc0NjQ5LCJleHAiOjE2Nzc2NjY2NDl9.zKBShAg9vRQUOWvmRemppR4JsbiTT1g7pYyTr5p28Po
+
+Test 7 : Place Order Api
 
 Test 2: Retailer Details
-The retailer id recived from is 90337 equals retailer id given by user 90337
+The retailer id received from is 90337 equals retailer id given by user 90337
 
 Test 3: Orders
-The last order number recieved from orders api 1000037  and the last order number recieved from retailer detail 1000037
+the last order number received from orders api 1000039  and the last order number received from retailer detail 1000037
 
 Test 4: Offers_List
 	 Test 1:Offer is active test
-		Coupon Code:Instant10                              Is_Active_Flag:Y
-		Coupon Code:1Per                              Is_Active_Flag:Y
-		Coupon Code:multipleoffer                              Is_Active_Flag:Y
-		Coupon Code:FreeSugar                              Is_Active_Flag:Y
+		Coupon Code:INS1PERCENT50K                              Is_Active_Flag:Y
+		Coupon Code:super                               Is_Active_Flag:Y
+		Coupon Code:super                               Is_Active_Flag:Y
 		Coupon Code:                               Is_Active_Flag:Y
 		Coupon Code:                               Is_Active_Flag:Y
 		Coupon Code:                               Is_Active_Flag:Y
 		Coupon Code:                               Is_Active_Flag:Y
 		Coupon Code:                               Is_Active_Flag:Y
-		Coupon Code:                               Is_Active_Flag:Y
-		Coupon Code:                               Is_Active_Flag:Y
-		Coupon Code:                               Is_Active_Flag:Y
+		Coupon Code:SUPERD                               Is_Active_Flag:Y
 
 	 Test 2:Offer Date Validity
 
-		Coupon Code:Instant10
-		this is the start date 2022-09-16 00:00
+		Coupon Code:INS1PERCENT50K
+		this is the start date 2023-01-11 00:00
 		this is the current date 2023-01-19 11:28 GMT+05:30
-		this is the end date 2023-01-30 23:59
+		this is the end date 2023-12-31 23:59
 
-		Coupon Code:1Per
-		this is the start date 2022-09-20 00:00
+		Coupon Code:613
+		this is the start date 2023-01-30 00:00 GMT+05:30
 		this is the current date 2023-01-19 11:28 GMT+05:30
-		this is the end date 2023-10-27 23:59
+		this is the end date 2023-01-30 23:59 IST
 
-		Coupon Code:multipleoffer
-		this is the start date 2022-11-02 00:00
+		the offer code 613 Start date occurs after current date
+		Coupon Code:686
+		this is the start date 2023-01-30 00:00 GMT+05:30
 		this is the current date 2023-01-19 11:28 GMT+05:30
-		this is the end date 2023-11-02 23:59
+		this is the end date 2023-01-30 23:59 IST
 
-		Coupon Code:FreeSugar
-		this is the start date 2022-12-06 00:00
+		the offer code 686 Start date occurs after current date
+		the offer code 5457 has start date and end dates as 0
+		the offer code 5458 has start date and end dates as 0
+		the offer code 5460 has start date and end dates as 0
+		the offer code 5461 has start date and end dates as 0
+		the offer code 5463 has start date and end dates as 0
+		Coupon Code:6733
+		this is the start date 2023-01-30 00:00 GMT+05:30
 		this is the current date 2023-01-19 11:28 GMT+05:30
-		this is the end date 2023-12-30 23:59
+		this is the end date 2023-01-30 23:59 IST
+
+		the offer code 6733 Start date occurs after current date
+
+	 Test 3:Store Series Checking Test
+
+		the offer code INS1PERCENT50K contains the store-series of requested retailer A
+		the product offer id 1020910023 does not contains the store-series of requested retailer 
+		the product offer id 1001040081 contains the store-series of requested retailer A
+		the product offer id 1000330031 contains the store-series of requested retailer A
+		the product offer id 1000110011 contains the store-series of requested retailer A
+		the product offer id 1000220040 contains the store-series of requested retailer A
+		the product offer id 1030710030 contains the store-series of requested retailer A
+		the product offer id 1001020055 contains the store-series of requested retailer A
+		the product offer id 1250120086 does not contains the store-series of requested retailer 
+		the product offer id 1250120086 contains the store-series of requested retailer A
+ 
+Test 5: Cart_Offers
+ 
+
+	 Test 1:Coupon If Availed
+
+		No coupons were availed!
+
+ 
+Test 6: Product Stock Check and Product offer check
+ 
+	Test 1: Product Stock Check and Product offer check for min_qty_1
+ 
+		1020910023 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 90 is equal to offer price recieved from get_offer_list API 90
+
+		1001040081 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 1500 is equal to offer price recieved from get_offer_list API 1500
+
+		1000330031 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 942 is equal to offer price recieved from get_offer_list API 942
+
+		1000110011 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 1000 is equal to offer price recieved from get_offer_list API 1000
+
+		1000220040 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 900 is equal to offer price recieved from get_offer_list API 900
+
+
+		1030710030 Is out of stock
+
+		1001020055 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 450 is equal to offer price recieved from get_offer_list API 450
+
+		1250120086 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 59 is equal to offer price recieved from get_offer_list API 59
+
+ 
+	Test 2: Product Stock Check and Product offer check for min_qty_2
+ 
+		1020910023 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+		1001040081 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+		1000330031 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 893 is equal to offer price recieved from get_offer_list API 942
+
+		1000110011 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+		1000220040 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 800 is equal to offer price recieved from get_offer_list API 900
+
+
+		1030710030 Is out of stock
+
+		1001020055 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 420 is equal to offer price recieved from get_offer_list API 450
+
+		1250120086 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+ 
+	Test 3: Product Stock Check and Product offer check for min_qty_3
+ 
+		1020910023 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+		1001040081 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+		1000330031 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 843 is equal to offer price recieved from get_offer_list API 942
+
+		1000110011 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+		1000220040 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
+
+
+		1030710030 Is out of stock
+
+		1001020055 Is in stock
+		 offer_price received from API for minimum_purchase_qty1 400 is equal to offer price recieved from get_offer_list API 450
+
+		1250120086 Is in stock
+		 the offer price is 0 because minimum_order_qty was 0 
