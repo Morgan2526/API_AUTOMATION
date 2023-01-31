@@ -31,18 +31,12 @@ public class auth_token_test {
 	Vector<String> min_purchase_qty1=new Vector<String>();
 	Vector<String> min_purchase_qty2=new Vector<String>();
 	Vector<String> min_purchase_qty3=new Vector<String>();
-	Vector<String> min_purchase_qty4=new Vector<String>();
-	Vector<String> min_purchase_qty5=new Vector<String>();
 	Vector<String> max_purchase_qty1=new Vector<String>();
 	Vector<String> max_purchase_qty2=new Vector<String>();
 	Vector<String> max_purchase_qty3=new Vector<String>();
-	Vector<String> max_purchase_qty4=new Vector<String>();
-	Vector<String> max_purchase_qty5=new Vector<String>();
 	Vector<String> offer_price1=new Vector<String>();
 	Vector<String> offer_price2=new Vector<String>();
 	Vector<String> offer_price3=new Vector<String>();
-	Vector<String> offer_price4=new Vector<String>();
-	Vector<String> offer_price5=new Vector<String>();
 
 	String coupon_code_order_level;
 	String[] ordervalue=new String[n];
