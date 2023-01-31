@@ -1172,7 +1172,7 @@ public class auth_token_test {
 				 try {
 				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
 				      myWriter.write("\n\t\t"+item_id+" Is in stock");
-				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price1.get(i)+"\n");
+				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price2.get(i)+"\n");
 				      myWriter.close();
 				 }catch (IOException e) {
 				      System.out.println("An error occurred.");
@@ -1273,7 +1273,7 @@ public class auth_token_test {
 				 try {
 				      FileWriter myWriter = new FileWriter("E:/Superzop/RestAssuredProject/src/test/resources/output.txt",true);
 				      myWriter.write("\n\t\t"+item_id+" Is in stock");
-				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price1.get(i)+"\n");
+				      myWriter.write("\n\t\t offer_price received from API for minimum_purchase_qty1 "+offer_price+" is equal to offer price recieved from get_offer_list API "+offer_price3.get(i)+"\n");
 				      myWriter.close();
 				 }catch (IOException e) {
 				      System.out.println("An error occurred.");
